@@ -493,7 +493,7 @@ class GameVisualizer:
 
 
 if __name__ == "__main__":
-    with open("samples/hard_sample.inp", "r") as f:
+    with open("samples/hell_sample.inp", "r") as f:
         lines = [line.strip() for line in f.readlines() if line.strip()]
     
     idx = 0

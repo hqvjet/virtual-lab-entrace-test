@@ -13,16 +13,6 @@ def build_graph(root: Node, order_objects: list, station_objects: list, max_weig
     def can_go_direct(from_pos, to_pos, fuel):
         return fuel > fuel_cost(from_pos, to_pos)
     
-    def find_nearest_station(from_pos, fuel, stations):
-        best = None
-        best_cost = float('inf')
-        for station in stations:
-            cost = fuel_cost(from_pos, station["position"])
-            if fuel >= cost and cost < best_cost:
-                best_cost = cost
-                best = station
-        return best, best_cost
-    
     num_orders = len(order_objects) // 2
     root.metadata["orders_status"] = {i: "pending" for i in range(num_orders)}
     
@@ -99,10 +89,11 @@ def build_graph(root: Node, order_objects: list, station_objects: list, max_weig
                     })
                     stack.append((pickup_node, path + [pickup_node], fuel_used + cost))
                 else:
-                    station, s_cost = find_nearest_station(pos, fuel, station_objects)
-                    if station:
+                    for station in station_objects:
                         s_pos = station["position"]
-                        if can_go_direct(s_pos, pickup_pos, max_fuel):
+                        s_cost = fuel_cost(pos, s_pos)
+                        
+                        if fuel >= s_cost and can_go_direct(s_pos, pickup_pos, max_fuel):
                             cost_to_pickup = fuel_cost(s_pos, pickup_pos)
                             total_cost = s_cost + cost_to_pickup
                             
@@ -143,10 +134,11 @@ def build_graph(root: Node, order_objects: list, station_objects: list, max_weig
                     })
                     stack.append((deliver_node, path + [deliver_node], fuel_used + cost))
                 else:
-                    station, s_cost = find_nearest_station(pos, fuel, station_objects)
-                    if station:
+                    for station in station_objects:
                         s_pos = station["position"]
-                        if can_go_direct(s_pos, deliver_pos, max_fuel):
+                        s_cost = fuel_cost(pos, s_pos)
+                        
+                        if fuel >= s_cost and can_go_direct(s_pos, deliver_pos, max_fuel):
                             cost_to_deliver = fuel_cost(s_pos, deliver_pos)
                             total_cost = s_cost + cost_to_deliver
                             
@@ -185,7 +177,7 @@ def core(n, m, w, f, start, orders, stations):
 
 
 if __name__ == "__main__":
-    with open("hell_sample.inp", "r") as f:
+    with open("samples/hell_sample.inp", "r") as f:
         lines = [line.strip() for line in f.readlines() if line.strip()]
     
     idx = 0
