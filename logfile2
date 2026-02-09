@@ -1,0 +1,2 @@
+2026-02-07 23:32:10.725 +07 [138950] LOG:  redirecting log output to logging collector process
+2026-02-07 23:32:10.725 +07 [138950] HINT:  Future log output will appear in directory "log".
