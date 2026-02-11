@@ -91,5 +91,17 @@ Do đó ta thêm các trường mới thể hiện tính quan hệ giữa từng
 #### 1.4. Thành quả vòng 1
 ![Thành quả vòng 1](assets/stage_1.png)
 
+#### Vòng 2: Tinh chỉnh batch_on_chain
+#### 2.1. Vấn đề từ vòng 1
+Ta có thể nhận thấy rằng với ERD trên, có nhược điểm ở batch_on_chain. Nếu quy trình là dạng đa luồng thay vì tuần tự thì sao (sữa đi một nhánh, gia vị đi nhánh khác xử lý song song), với vấn đề này thì ERD này sẽ die, do đó ta cần refine ở chỗ batch_on_chain này.
+#### 2.2. Solution
+Ta sẽ sử dụng cơ chế batch đẻ batch ở đây để giải quyết vấn đề. Cụ thể là đưa về bài toán gối nhau. Nếu gặp bài toán 2 luồng thì tự thân batch_on_chain này sẽ tự lưu chính nó thành 2 bản khác nhưng trỏ về bản gốc, tại bản con đó sẽ trỏ tới các items trong nhánh con đó. Từ đó ta có thể giải quyết vấn đề này theo dạng chia để trị.
+Ở đây em sẽ thêm `parent_id` làm self-FK vào batch_on_chain với mục đích truy được parent theo từng nhánh. Với cách này thì giờ đây có thể handle được các trường hợp hierachical chain.
+
+![Solution](assets/stage_2.png)
+
+#### Vòng 3: Hỗ trợ mở rộng các loại sản phẩm mới
+#### 
+
 ### Giai đoạn 5: Xác định Index
 ### Giai đoạn 6: Xác định thuật toán scan cho các câu query có join phức tạp
