@@ -1,0 +1,395 @@
+{
+  "name": "Hệ thống Đại học Việt Nam",
+  "id": "root",
+  "type": "root",
+  "children": [
+    {
+      "name": "Miền Bắc",
+      "id": "region_north",
+      "type": "region",
+      "color_code": "#E63946", 
+      "children": [
+        {
+          "name": "ĐH Bách Khoa Hà Nội",
+          "id": "hust",
+          "type": "university",
+          "students": 35000,
+          "lecturers": 1200
+        },
+        {
+          "name": "ĐH Kinh tế Quốc dân",
+          "id": "neu",
+          "type": "university",
+          "students": 45000,
+          "lecturers": 1100
+        },
+        {
+          "name": "ĐH Công nghệ - ĐHQGHN",
+          "id": "vnu_uet",
+          "type": "university",
+          "students": 12000,
+          "lecturers": 600
+        },
+        {
+          "name": "ĐH Ngoại thương",
+          "id": "ftu",
+          "type": "university",
+          "students": 15000,
+          "lecturers": 500
+        },
+        {
+          "name": "Học viện BCVT (Hà Nội)",
+          "id": "ptit",
+          "type": "university",
+          "students": 18000,
+          "lecturers": 700
+        },
+        {
+          "name": "ĐH Y Hà Nội",
+          "id": "hmu",
+          "type": "university",
+          "students": 8000,
+          "lecturers": 900
+        },
+        {
+          "name": "ĐH FPT (Hòa Lạc)",
+          "id": "fpt_hn",
+          "type": "university",
+          "students": 25000,
+          "lecturers": 600
+        },
+        {
+          "name": "ĐH Quốc gia Hà Nội",
+          "id": "vnu_hn",
+          "type": "university",
+          "students": 50000,
+          "lecturers": 2500
+        },
+        {
+          "name": "ĐH Sư phạm Hà Nội",
+          "id": "hnue",
+          "type": "university",
+          "students": 20000,
+          "lecturers": 800
+        },
+        {
+          "name": "ĐH Thương mại",
+          "id": "thuongmai",
+          "type": "university",
+          "students": 22000,
+          "lecturers": 650
+        },
+        {
+          "name": "ĐH Luật Hà Nội",
+          "id": "hlu",
+          "type": "university",
+          "students": 18000,
+          "lecturers": 550
+        },
+        {
+          "name": "ĐH Xây dựng Hà Nội",
+          "id": "nuce",
+          "type": "university",
+          "students": 16000,
+          "lecturers": 500
+        },
+        {
+          "name": "ĐH Giao thông Vận tải",
+          "id": "utc",
+          "type": "university",
+          "students": 24000,
+          "lecturers": 750
+        },
+        {
+          "name": "ĐH Mỏ - Địa chất",
+          "id": "humg",
+          "type": "university",
+          "students": 14000,
+          "lecturers": 450
+        },
+        {
+          "name": "Học viện Nông nghiệp VN",
+          "id": "vnua",
+          "type": "university",
+          "students": 28000,
+          "lecturers": 950
+        },
+        {
+          "name": "ĐH Khoa học Xã hội & Nhân văn",
+          "id": "ussh",
+          "type": "university",
+          "students": 15000,
+          "lecturers": 680
+        },
+        {
+          "name": "ĐH Dược Hà Nội",
+          "id": "hup",
+          "type": "university",
+          "students": 7000,
+          "lecturers": 400
+        }
+      ]
+    },
+    {
+      "name": "Miền Trung",
+      "id": "region_central",
+      "type": "region",
+      "color_code": "#F1FAEE",
+      "children": [
+        {
+          "name": "ĐH CNTT & TT Việt - Hàn (VKU)",
+          "id": "vku",
+          "type": "university",
+          "students": 6000,
+          "lecturers": 300
+        },
+        {
+          "name": "ĐH Bách Khoa Đà Nẵng",
+          "id": "dut",
+          "type": "university",
+          "students": 28000,
+          "lecturers": 900
+        },
+        {
+          "name": "ĐH Kinh tế Đà Nẵng",
+          "id": "due",
+          "type": "university",
+          "students": 15000,
+          "lecturers": 550
+        },
+        {
+          "name": "ĐH Sư phạm Đà Nẵng",
+          "id": "ued",
+          "type": "university",
+          "students": 12000,
+          "lecturers": 400
+        },
+        {
+          "name": "Đại học Huế",
+          "id": "hue_uni",
+          "type": "university",
+          "students": 30000,
+          "lecturers": 1500
+        },
+        {
+          "name": "Đại học Vinh",
+          "id": "vinh_uni",
+          "type": "university",
+          "students": 22000,
+          "lecturers": 850
+        },
+        {
+          "name": "Đại học Quy Nhơn",
+          "id": "qn_uni",
+          "type": "university",
+          "students": 14000,
+          "lecturers": 500
+        },
+        {
+          "name": "Đại học Nha Trang",
+          "id": "nt_uni",
+          "type": "university",
+          "students": 16000,
+          "lecturers": 600
+        },
+        {
+          "name": "ĐH Duy Tân",
+          "id": "duytan",
+          "type": "university",
+          "students": 35000,
+          "lecturers": 1100
+        },
+        {
+          "name": "ĐH FPT Đà Nẵng",
+          "id": "fpt_dn",
+          "type": "university",
+          "students": 8000,
+          "lecturers": 350
+        },
+        {
+          "name": "ĐH Đông Á Đà Nẵng",
+          "id": "donga",
+          "type": "university",
+          "students": 12000,
+          "lecturers": 480
+        },
+        {
+          "name": "ĐH Quảng Nam",
+          "id": "qn_edu",
+          "type": "university",
+          "students": 9000,
+          "lecturers": 320
+        },
+        {
+          "name": "ĐH Tây Nguyên",
+          "id": "tnu",
+          "type": "university",
+          "students": 18000,
+          "lecturers": 700
+        },
+        {
+          "name": "ĐH Đà Lạt",
+          "id": "dlu",
+          "type": "university",
+          "students": 13000,
+          "lecturers": 520
+        }
+      ]
+    },
+    {
+      "name": "Miền Nam",
+      "id": "region_south",
+      "type": "region",
+      "color_code": "#A8DADC",
+      "children": [
+        {
+          "name": "ĐH Bách Khoa TP.HCM",
+          "id": "hcmut",
+          "type": "university",
+          "students": 32000,
+          "lecturers": 1100
+        },
+        {
+          "name": "ĐH KHTN TP.HCM",
+          "id": "hcmus",
+          "type": "university",
+          "students": 20000,
+          "lecturers": 950
+        },
+        {
+          "name": "ĐH Kinh tế TP.HCM",
+          "id": "ueh",
+          "type": "university",
+          "students": 40000,
+          "lecturers": 1300
+        },
+        {
+          "name": "RMIT Việt Nam",
+          "id": "rmit",
+          "type": "university",
+          "students": 10000,
+          "lecturers": 700
+        },
+        {
+          "name": "ĐH Tôn Đức Thắng",
+          "id": "tdtu",
+          "type": "university",
+          "students": 26000,
+          "lecturers": 1200
+        },
+        {
+          "name": "ĐH Sư phạm Kỹ thuật TP.HCM",
+          "id": "ute",
+          "type": "university",
+          "students": 24000,
+          "lecturers": 900
+        },
+        {
+          "name": "Đại học Cần Thơ",
+          "id": "cantho",
+          "type": "university",
+          "students": 45000,
+          "lecturers": 1800
+        },
+        {
+          "name": "ĐH Văn Lang",
+          "id": "vanlang",
+          "type": "university",
+          "students": 30000,
+          "lecturers": 1000
+        },
+        {
+          "name": "HUTECH",
+          "id": "hutech",
+          "type": "university",
+          "students": 35000,
+          "lecturers": 1100
+        },
+        {
+          "name": "ĐH Quốc gia TP.HCM",
+          "id": "vnuhcm",
+          "type": "university",
+          "students": 55000,
+          "lecturers": 2800
+        },
+        {
+          "name": "ĐH Nông Lâm TP.HCM",
+          "id": "nlu",
+          "type": "university",
+          "students": 19000,
+          "lecturers": 720
+        },
+        {
+          "name": "ĐH Y Dược TP.HCM",
+          "id": "ump",
+          "type": "university",
+          "students": 15000,
+          "lecturers": 1400
+        },
+        {
+          "name": "ĐH Sài Gòn",
+          "id": "sgu",
+          "type": "university",
+          "students": 28000,
+          "lecturers": 950
+        },
+        {
+          "name": "ĐH Công nghệ Sài Gòn (STU)",
+          "id": "stu",
+          "type": "university",
+          "students": 21000,
+          "lecturers": 680
+        },
+        {
+          "name": "ĐH Ngân hàng TP.HCM",
+          "id": "hub",
+          "type": "university",
+          "students": 17000,
+          "lecturers": 600
+        },
+        {
+          "name": "ĐH Hoa Sen",
+          "id": "hsu",
+          "type": "university",
+          "students": 14000,
+          "lecturers": 520
+        },
+        {
+          "name": "ĐH FPT TP.HCM",
+          "id": "fpt_hcm",
+          "type": "university",
+          "students": 12000,
+          "lecturers": 450
+        },
+        {
+          "name": "ĐH An Giang",
+          "id": "agu",
+          "type": "university",
+          "students": 25000,
+          "lecturers": 850
+        },
+        {
+          "name": "ĐH Trà Vinh",
+          "id": "tvu",
+          "type": "university",
+          "students": 11000,
+          "lecturers": 420
+        },
+        {
+          "name": "ĐH Tiền Giang",
+          "id": "tgu",
+          "type": "university",
+          "students": 9000,
+          "lecturers": 350
+        },
+        {
+          "name": "ĐH Công nghiệp TP.HCM",
+          "id": "iuh",
+          "type": "university",
+          "students": 38000,
+          "lecturers": 1250
+        }
+      ]
+    }
+  ]
+}

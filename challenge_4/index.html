@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mạng lưới Đại học Việt Nam - Interactive Network Visualization</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>🎓 Mạng lưới Đại học Việt Nam</h1>
+            <p class="subtitle">Interactive Network Visualization - 52 Universities Across 3 Regions</p>
+        </header>
+
+        <!-- Control Panel -->
+        <div class="control-panel">
+            <div class="controls-left">
+                <div class="control-group">
+                    <label>🔍 Tìm kiếm:</label>
+                    <input type="text" id="searchInput" placeholder="Nhập tên trường...">
+                </div>
+                
+                <div class="control-group">
+                    <label>🌍 Lọc theo miền:</label>
+                    <select id="regionFilter">
+                        <option value="all">Tất cả miền</option>
+                        <option value="region_north">Miền Bắc</option>
+                        <option value="region_central">Miền Trung</option>
+                        <option value="region_south">Miền Nam</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label>👥 Sắp xếp theo:</label>
+                    <select id="sortBy">
+                        <option value="name">Tên</option>
+                        <option value="students">Sinh viên</option>
+                        <option value="lecturers">Giảng viên</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="controls-right">
+                <button id="resetBtn" class="btn-primary">🔄 Reset View</button>
+                <button id="exportBtn" class="btn-secondary">📥 Export PNG</button>
+            </div>
+        </div>
+
+        <!-- Main Visualization Area -->
+        <div class="visualization-container">
+            <svg id="network-graph"></svg>
+            
+            <!-- Tooltip -->
+            <div id="tooltip" class="tooltip">
+                <div class="tooltip-header"></div>
+                <div class="tooltip-content"></div>
+            </div>
+
+            <!-- Legend -->
+            <div class="legend">
+                <h3>📊 Chú thích</h3>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #E63946;"></div>
+                    <span>Miền Bắc</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #F1FAEE;"></div>
+                    <span>Miền Trung</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #A8DADC;"></div>
+                    <span>Miền Nam</span>
+                </div>
+                <div class="legend-divider"></div>
+                <div class="legend-info">
+                    <p><strong>Kích thước node:</strong> Số sinh viên</p>
+                    <p><strong>Độ đậm màu:</strong> Số giảng viên</p>
+                    <p><strong>Cạnh:</strong> Kết nối khu vực</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Statistics Panel -->
+        <div class="stats-panel">
+            <h3>📈 Thống kê tổng quan</h3>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value" id="totalUniversities">0</div>
+                    <div class="stat-label">Trường ĐH</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="totalStudents">0</div>
+                    <div class="stat-label">Sinh viên</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="totalLecturers">0</div>
+                    <div class="stat-label">Giảng viên</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="avgRatio">0</div>
+                    <div class="stat-label">Tỷ lệ SV/GV</div>
+                </div>
+            </div>
+            
+            <!-- Top Universities -->
+            <div class="top-universities">
+                <h4>🏆 Top 5 Trường lớn nhất</h4>
+                <ul id="topUniversitiesList"></ul>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p>💡 Drag để di chuyển nodes | Scroll để zoom | Hover để xem thông tin chi tiết</p>
+        </footer>
+    </div>
+
+    <script src="visualization.js"></script>
+</body>
+</html>
