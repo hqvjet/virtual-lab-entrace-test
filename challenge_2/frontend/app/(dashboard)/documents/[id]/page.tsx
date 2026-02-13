@@ -15,6 +15,7 @@ import {
   Edit,
   CheckCircle,
   Clock,
+  Eye,
 } from 'lucide-react';
 import Link from 'next/link';
 import { ROUTES, DOCUMENT_STATUS_COLORS } from '@/lib/constants';

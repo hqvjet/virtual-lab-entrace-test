@@ -33,6 +33,8 @@ Vì giới hạn thời gian nên em sẽ chỉ chủ yếu tập trung vào 10 
     - Assign role: Chủ yếu quản lý phân quyền của từng người dùng để đưa họ vào từng chức năng
     - Manage resources: Kiểm soát ngưởi dùng và documents
 
+![usecase](assets/usecase_diagram.png)
+
 ### 4. Tech Stack
 #### 4.1. Frontend
 - Nextjs làm framework chính cho develop frontend
@@ -42,3 +44,9 @@ Vì giới hạn thời gian nên em sẽ chỉ chủ yếu tập trung vào 10 
 #### 4.2. Backend
 - Fastapi làm framework chính cho develop backend
 - PostgreSQL làm RDBMS để chứa dữ liệu
+
+![erd](assets/erd.png)
+
+### 5. Cách dùng sourcecode
+Ở đây em đã chuẩn bị sẵn `run.sh` rồi ạ, thầy chỉ cần chạy file này là có thể khởi động toàn bộ lên hết được ạ. Thêm một phần nữa là thầy cần tạo `.env` với DB endpoint như trong `.env.example` để có thể store và dùng data ạ.
+Đây là video em đã chuẩn bị để demo challenge 2: [VIDEO HERE](https://youtu.be/9n0bww2yN8c)
