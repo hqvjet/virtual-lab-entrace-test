@@ -20,7 +20,7 @@ def build_graph(root: Node, order_objects: list, station_objects: list, max_weig
     start_pos = root.position
     best = {"path": [], "fuel": float('inf')}
     stack = [(root, [root], 0)]
-    visited = set()
+    visited = {}
     
     iter_count = 0
     max_iter = 1000000
@@ -35,9 +35,9 @@ def build_graph(root: Node, order_objects: list, station_objects: list, max_weig
         status = node.get_metadata("orders_status")
         
         state_sig = (tuple(pos), tuple(sorted(status.items())))
-        if state_sig in visited:
+        if state_sig in visited and visited[state_sig] <= fuel_used:
             continue
-        visited.add(state_sig)
+        visited[state_sig] = fuel_used
         
         if fuel_used >= best["fuel"]:
             continue

@@ -47,10 +47,8 @@ Bằng điều kiện cắt nhánh và ý tưởng heuristic các trạm xăng �
 Sau khi chúng ta có cây trạng thái, ta sẽ tiến hành DFS cây bằng stack để tìm số lượng ô di chuyển ít nhất mà thỏa mãn điểm root và leaf đều là điểm start của robot (trên thanh trạng thái chỉ xuất hiện điểm start khi và chỉ khi toàn bộ đơn hàng đều nhận và giao hết toàn bộ) và lưu path tối ưu đó
 
 ### 3. Cách sử dụng code
-Ở đây em đã chuẩn bị sẵn [1 video trên youtube](https://www.youtube.com/watch?v=QdtvLQ12ceE) để thầy có thể xem nhanh ạ. Hoặc nếu thầy muốn thầy có thể follow instruction ở dưới của em để chạy thử code ạ.
+Ở đây em đã chuẩn bị sẵn [video](https://youtu.be/iURiGK3lyEw) để thầy có thể xem nhanh ạ. Hoặc nếu thầy muốn thầy có thể follow instruction ở dưới của em để chạy thử code ạ.
 - `pip install -r requirements.txt`
 - `python game_visualizer.py`
 
-*Note: Thầy có thể chỉnh test sample hoặc thêm mới ở trong samples folder ạ*
-
-### Em xin trân trọng gửi lời cảm ơn sâu sắc đến thầy, em kính chúc thầy một ngày vui vẻ và tràn đầy năng lượng !
+*Note: Thầy có thể chỉnh test sample hoặc thêm mới ở trong `samples` folder ạ*

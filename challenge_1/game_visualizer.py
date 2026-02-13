@@ -4,7 +4,7 @@ from core_algorithm import core
 
 pygame.init()
 
-CELL_SIZE = 30
+CELL_SIZE = 20
 INFO_WIDTH = 320
 CONTROL_HEIGHT = 100
 
