@@ -12,7 +12,7 @@ Lấy kiến trúc từ [DeepAR của Amazon](https://arxiv.org/pdf/1704.04110).
 ![deepar](assets/deepAR.png)
 
 Trong đó figure ở phía bên trái là quá trình training còn bên phải là quá trình inference. 
-- Training: Khác với traditional model, LSTM ở đây nhận luôn cả target ở quá khứ trước đó 1 step và đưa vào LSTM để lấy hidden state. Tiếp theo hidden state này sẽ là input để infer ra variance và mean trong Gaussian Norm. Tiếp đến là hành vi học của model, ta sử dụng NLL loss kẹp PDF làm chủ đạo. Hàm NLL sẽ cố gắng tối đa hóa xác suất của hàm PDF trong khi hàm PDF thì lại cố gắng đẩy mean và variance sao cho giá trị `z` tại PDF là cao nhất. Nhìn vào figure thì ta có thể thấy có biến `x`, biến này chính là covariate (ở bài toán của mình sẽ là `country` và `year`). Về chuỗi input data, em chọn `window=10` (10 năm liên tiếp của mỗi quốc gia), nghĩa là trong memory sẽ stack 10 LSTM cell nối nhau như trong figure trên. 
+- Training: Khác với traditional model, LSTM ở đây nhận luôn cả target ở quá khứ trước đó 1 step và đưa vào LSTM để lấy hidden state. Tiếp theo hidden state này sẽ là input để infer ra std và mean trong Gaussian Norm. Tiếp đến là hành vi học của model, ta sử dụng NLL loss kẹp PDF làm chủ đạo. Hàm NLL sẽ cố gắng tối đa hóa xác suất của hàm PDF trong khi hàm PDF thì lại cố gắng đẩy mean và std sao cho giá trị `z` tại PDF là cao nhất. Nhìn vào figure thì ta có thể thấy có biến `x`, biến này chính là covariate (ở bài toán của mình sẽ là `country` và `year`). Về chuỗi input data, em chọn `window=10` (10 năm liên tiếp của mỗi quốc gia), nghĩa là trong memory sẽ stack 10 LSTM cell nối nhau như trong figure trên. 
 - Inference: Đây sẽ là nơi thực hiện dự đoán tương lai thật sự. Em chia ra thành 2 phần là bước đệm và mơ. Giả sử dự đoán dân số năm 2026 của VN thì em sẽ lấy bước đệm từ 2014 tới 2023 (vì dữ liệu đã biết hiện tại chỉ ở 2023), sau đó sẽ thực hiện việc mơ tới các năm tương lai chịu tác động bới Gauss Distribution cho tới khi đạt được tới năm mong muốn.
 
 Một điểm đặc biệt ở đây nữa mà trong paper không nhắc tới đó là `country` trong dữ liệu dạng text cho nên em cần thêm 1 chút kiến trúc để hỗ trợ text trong DeepAR
@@ -30,7 +30,32 @@ Với baseline model, em chọn:
 Em chọn dữ liệu đã nêu ở phần đầu bài viết, trong đó em chia train:valid:test thành 70:10:20. Đối với model đề xuất đấu với single time series thì em chỉ cho 2 model này test trên 1 quốc gia (được lọc ra trong test set). Còn khi model đề xuất đấu với model còn lại thì em cho nó test trên bộ test chuẩn. Điều này mang tính công bằng.
 
 #### Thiết lập thực nghiệm
+Mô hình LSTM trong thực nghiệm này em chọn cấu hình là:
+- Số layer của LSTM: 2 (không bidirectional do dữ liệu có tính tiến lên chứ không ngoảnh đầu)
+- Country embedding dim: 32
+- Year embedding dim: 8
+- Input của LSTM: 32 + 8 + 1 (1 ở đây là population đã normalized)
+
+Trainable Params:
+- Ma trận chứa embedding của `country`
+- Ma trận chứa embedding của `year`
+- LSTM model
+- Ma trận của std và mean
+
+Training config:
+- Epoch: 150
+- Lr: 1e-3
+- Batch size: 128
+- Gradient clipping: 10
+- Trọng số hãm weight phình to: 1e-5
+
 #### Kết quả thực nghiệm
+| Criteria | DeepAR | Multiple LSTM | Single LSTM |
+| --------- | --------- | --------- | --------- |
+| RMSE    | 3,013,301.39 | 2,789,425.04 | 4,376,917.02
+| MAE    | 2,881,240.40 | 1,692,210.49 | 3,876,480.24
+
+Từ bảng trên ta có thể thấy rằng Multiple LSTM mạnh nhất overall, mạnh hơn cả DeepAR. Trong code của em không sử dụng seed cố định cho nên có thể thấy rằng Multi LSTM ăn hên rơi gần điểm minimum tốt và nó nghe theo gradient vector để lăn tới đó chứ paper đã thực nghiệm nên không thể Multi LSTM mạnh hơn DeepAR. Một ý tưởng để enhance thực nghiệm đó là chạy trên 5-10 seed cố định mỗi loại sau đó lấy mean, std kết quả mỗi model để xác định average performance và sự lay động của kết quả hoặc sử dụng bộ model weight của các seed đó rồi tính Euclid distance xem model nào có khoảng cách bé hơn -> ổn định hơn.
 
 ## Kiến trúc phần mềm
 Sau khi đã huấn luyện được mô hình và pipeline, em tổ chức app dưới dạng frontend - backend. Trong đó frontend chủ đạo sử dụng NextJS và backend sử dụng FastAPI. Phía backend sẽ chạy trained AI model và chờ request đến từ frontend để đưa input vào pipeline và infer ra kết quả trả về cho frontend.

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, ReferenceLine } from 'recharts';
 
@@ -85,11 +85,52 @@ export default function ForecastPanel({ country, historicalData }: ForecastPanel
   const [selectedYear, setSelectedYear] = useState(2030);
   const [selectedModel, setSelectedModel] = useState('deepar');
   const [showComparison, setShowComparison] = useState(false);
+  const [isLoadingAI, setIsLoadingAI] = useState(false);
+  const [aiConnected, setAiConnected] = useState(false);
+  const [realForecast, setRealForecast] = useState<{ year: number; population: number; lower: number; upper: number }[] | null>(null);
 
-  const forecast = useMemo(
-    () => generateFakeForecast(historicalData, selectedYear, selectedModel),
-    [historicalData, selectedYear, selectedModel]
-  );
+  // Fetch real AI predictions for DeepAR model
+  const fetchRealForecast = useCallback(async (c: string, year: number) => {
+    setIsLoadingAI(true);
+    try {
+      const res = await fetch(`/api/forecast?country=${encodeURIComponent(c)}&target_year=${year}&num_samples=200`);
+      const data = await res.json();
+      if (data.forecasts && data.forecasts.length > 0) {
+        const mapped = data.forecasts.map((f: { year: number; mean: number; lower: number; upper: number }) => ({
+          year: f.year,
+          population: Math.round(f.mean),
+          lower: Math.round(f.lower),
+          upper: Math.round(f.upper),
+        }));
+        setRealForecast(mapped);
+        setAiConnected(true);
+      } else {
+        setRealForecast(null);
+        setAiConnected(false);
+      }
+    } catch {
+      setRealForecast(null);
+      setAiConnected(false);
+    } finally {
+      setIsLoadingAI(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (selectedModel === 'deepar' && country) {
+      fetchRealForecast(country, selectedYear);
+    } else {
+      setRealForecast(null);
+    }
+  }, [country, selectedYear, selectedModel, fetchRealForecast]);
+
+  // Use real AI forecast if available, otherwise fall back to mock
+  const forecast = useMemo(() => {
+    if (selectedModel === 'deepar' && realForecast && realForecast.length > 0) {
+      return realForecast;
+    }
+    return generateFakeForecast(historicalData, selectedYear, selectedModel);
+  }, [historicalData, selectedYear, selectedModel, realForecast]);
 
   const allModelForecasts = useMemo(() => {
     if (!showComparison) return null;
@@ -168,9 +209,34 @@ export default function ForecastPanel({ country, historicalData }: ForecastPanel
           >
             <div className="h-2 w-2 rounded-full" style={{ background: model.color }} />
             {model.name}
+            {model.id === 'deepar' && aiConnected && (
+              <span className="ml-1 h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-lg shadow-emerald-400/50 animate-pulse" />
+            )}
           </button>
         ))}
       </div>
+
+      {/* AI Status */}
+      {selectedModel === 'deepar' && (
+        <div className="flex items-center gap-2 text-[10px]">
+          {isLoadingAI ? (
+            <>
+              <div className="h-1.5 w-1.5 rounded-full bg-yellow-400 animate-pulse" />
+              <span className="text-yellow-400/70">Querying DeepAR model...</span>
+            </>
+          ) : aiConnected ? (
+            <>
+              <div className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+              <span className="text-emerald-400/70">Live AI predictions</span>
+            </>
+          ) : (
+            <>
+              <div className="h-1.5 w-1.5 rounded-full bg-white/20" />
+              <span className="text-white/20">AI backend offline — using estimated data</span>
+            </>
+          )}
+        </div>
+      )}
 
       {/* Forecast result */}
       {targetForecast && (
@@ -331,7 +397,9 @@ export default function ForecastPanel({ country, historicalData }: ForecastPanel
 
       {/* Disclaimer */}
       <p className="text-[10px] text-white/20 text-center italic">
-        * Forecast using fake data. Connect to AI backend for real DeepAR predictions.
+        {selectedModel === 'deepar' && aiConnected
+          ? '* Real-time forecast from DeepAR (LSTM + Gaussian Likelihood)'
+          : '* Estimated data — start AI backend for real DeepAR predictions'}
       </p>
     </div>
   );
