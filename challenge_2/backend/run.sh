@@ -3,22 +3,27 @@
 echo "🚀 Starting DocHub Backend..."
 echo ""
 
-# Check if virtual environment exists
+# Check if virtual environment exists, create if not
 if [ ! -d "venv" ]; then
-    echo "❌ Virtual environment not found!"
-    echo "Please run: python -m venv venv"
-    exit 1
+    echo "⚠️  Virtual environment not found!"
+    echo "📦 Creating virtual environment..."
+    python3 -m venv venv
+    source venv/bin/activate
+    echo "📦 Installing Python dependencies..."
+    pip install -r requirements.txt
+    echo "✅ Virtual environment created and dependencies installed"
+    echo ""
+else
+    source venv/bin/activate
 fi
-
-# Activate virtual environment
-source venv/bin/activate
 
 # Check if .env exists
 if [ ! -f ".env" ]; then
     echo "⚠️  .env file not found!"
     echo "Copying .env.example to .env..."
     cp .env.example .env
-    echo "✅ Please update .env with your database credentials"
+    echo "✅ .env created from .env.example"
+    echo "⚠️  Please update .env with your database credentials if needed"
     echo ""
 fi
 

@@ -59,3 +59,6 @@ Từ bảng trên ta có thể thấy rằng Multiple LSTM mạnh nhất overall
 
 ## Kiến trúc phần mềm
 Sau khi đã huấn luyện được mô hình và pipeline, em tổ chức app dưới dạng frontend - backend. Trong đó frontend chủ đạo sử dụng NextJS và backend sử dụng FastAPI. Phía backend sẽ chạy trained AI model và chờ request đến từ frontend để đưa input vào pipeline và infer ra kết quả trả về cho frontend.
+
+## Cách sử dụng sourcecode
+Em đã chuẩn bị sẵn file `run.sh` ở trong challenge này để thầy có thể chạy ngay rồi ạ, em cũng có chuẩn bị sẵn video: [VIDEO HERE](https://youtu.be/3WOt7VlKOyk)
