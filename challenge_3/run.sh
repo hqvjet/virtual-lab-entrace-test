@@ -23,7 +23,7 @@ fi
 echo -e "${GREEN}📡 Starting FastAPI Backend on port 8000...${NC}"
 cd backend
 source venv/bin/activate
-uvicorn main:app --reload --port 8000 &
+uvicorn main:app --reload --host 0.0.0.0 --port 8000 &
 BACKEND_PID=$!
 cd ..
 

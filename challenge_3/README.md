@@ -37,3 +37,6 @@ Frontend đóng vai trò làm giao diện, nhận dữ liệu và visualize cho 
 
 ### 4. Ý tưởng tương lai
 Nếu trong hệ thống, việc xây dựng 1 dashboard mà thể hiện được toàn bộ sự tương quan của từng feature hay 1 cụm feature thì mất rất nhiều thời gian và độ khó tăng lên nếu feature quá nhiều. Giả sử có một ông manager ông hỏi rằng việc người dân không tiêm vaccine có phải do họ không tin vào chính phủ hay do họ không sợ covid ? Thế là dev team phải hùng hục ngồi đọc dữ liệu rồi nấu nướng visualize đưa lên cho sếp. Thay vào đó ta sẽ sử dụng agent workflow trong đó LLM đóng vai trò core brain để infer các câu SQL truy vấn vào RDBMS, và RDBMS sẽ chứa dữ liệu vietnam.csv này. Lúc này sếp chỉ cần đặt câu hỏi rõ ràng cho agent và nó sẽ tự làm việc với database kết hợp visualize tool để trả về kết quả cho sếp.
+
+### 5. Cách sử dụng sourcecode
+Ở đây em đã chuẩn bị sẵn file `run.sh` này và thầy có thể chạy file này để sử dụng ạ. Bên cạnh đó em còn chuẩn bị [video](https://youtu.be/vaixiaWGBZw) trên Youtube sẵn để thầy có thể xem nhanh ạ.
